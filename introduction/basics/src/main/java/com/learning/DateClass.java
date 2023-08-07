@@ -1,5 +1,6 @@
 package com.learning;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,24 +9,24 @@ public class DateClass {
     public static void main(String[] args) {
 
         Date myDate = new Date();
-        SimpleDateFormat mySimpleDateFormat = new SimpleDateFormat("EEEE dd MMMM YYYY, H:mm a");
+        SimpleDateFormat mySimpleDateFormat = new SimpleDateFormat("dd MMMM YYYY");
+        
+        try {
+            System.out.println(mySimpleDateFormat.parse("13 diciembre 2030"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         
         String myFormattedDate = mySimpleDateFormat.format(myDate);
         System.out.println(myFormattedDate);  
-        System.out.println(mySimpleDateFormat.toPattern());
-        
-        for(int i=0; i < 1000000;i++){}
-
-        long timeToDo = (new Date().getTime()) - myDate.getTime();
-        System.out.println("Time to do calculations: " + timeToDo + " ms.");
 
         Calendar myCalendar = Calendar.getInstance();
         myCalendar.set(2030, Calendar.AUGUST , 13,14,20);
         myCalendar.set(Calendar.MONTH, Calendar.DECEMBER);
-
+    
         Date myCDate = myCalendar.getTime();
         myFormattedDate = mySimpleDateFormat.format(myCDate);
 
-        System.out.println(myFormattedDate);
+        System.out.println("Changed date: " + myFormattedDate);
     }
 }
