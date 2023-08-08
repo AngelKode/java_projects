@@ -9,7 +9,7 @@ public class Environment {
         
         System.out.println("Environment values: ");
         for(String key : myEnv.keySet()){
-            System.out.println(key + " => " + myEnv.get(key)) ;
+            System.out.println(key + " => " + myEnv.get(key));
         }
     }
 }
