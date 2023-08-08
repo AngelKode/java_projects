@@ -1,7 +1,6 @@
 package com.learning;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public class Matrix {
     public static void main(String[] args) {
