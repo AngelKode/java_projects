@@ -9,3 +9,4 @@ public @Data class Car{
     private String modelName;
     private int yearModel;
 }
+
