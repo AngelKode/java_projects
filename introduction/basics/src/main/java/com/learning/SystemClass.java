@@ -18,7 +18,6 @@ public class SystemClass {
           FileInputStream myFileInputStream = new FileInputStream("./introduction/basics/src/main/java/com/learning/config.properties"); 
           Properties properties = new Properties(System.getProperties());
           properties.load(myFileInputStream);
-          
           System.setProperties(properties);
           System.getProperties().list(System.out);
         } catch (FileNotFoundException e) {
