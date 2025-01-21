@@ -1,9 +1,9 @@
 package org.angelkode.inheritance;
 
 public class Person {
-    protected String name;
-    protected String surname;
-    protected int age;
+    private String name;
+    private String surname;
+    private int age;
 
     Person(String name, String surname, int age) {
         this.name = name;

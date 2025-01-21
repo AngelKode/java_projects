@@ -14,5 +14,8 @@ public class main_inheritance {
 
         System.out.println(teacher.getSubjectAt(0));
         System.out.println(teacher.getSubjectAt(1));
+
+        Person studentTwo = new Student();
+        ((Student)studentTwo).setGrades(0,8.3);
     }
 }

@@ -11,7 +11,7 @@ public final class Student extends Person {
     }
     @Override
     public String getName(){
-        return this.name + ", I'm a student";
+        return super.getName() + ", I'm a student";
     }
 
     public String getCollegeName() {
