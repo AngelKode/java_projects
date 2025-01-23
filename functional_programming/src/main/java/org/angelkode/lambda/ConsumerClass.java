@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ConsumerClass {
     public static void main(String[] args) {
@@ -50,5 +51,17 @@ public class ConsumerClass {
 
         setAge.accept(modelOne, 25);
         System.out.println(modelOne.getAge());
+
+        //Supplier
+        Supplier<Double> randomNumber = Math::random;
+        System.out.println(randomNumber.get());
+
+        //Creating users
+        Supplier<ModelExample> generateModel = ModelExample::new;
+        ModelExample modelTwo = generateModel.get();
+        setAge.accept(modelTwo, 30);
+
+        System.out.println(modelTwo.getAge());
+
     }
 }
