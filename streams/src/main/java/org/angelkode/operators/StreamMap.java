@@ -1,5 +1,7 @@
 package org.angelkode.operators;
 
+import org.angelkode.models.User;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,5 +23,22 @@ public class StreamMap {
 
         System.out.println(myItems);
 
+        //-----------------------------------
+
+        //Creating Users from a list of strings
+        Stream<User> newUsers = Stream.of("Juan Lopez","Carlos Vallarta")
+                .map(String::toUpperCase)
+                .map(name -> {
+                    String nameNew = name.split(" ")[0];
+                    String surnameNew = name.split(" ")[1];
+
+                    return new User(nameNew,surnameNew);
+                });
+
+        List<String> userData = newUsers
+                .map(User::getName)
+                .toList();
+
+        userData.forEach(System.out::println);
     }
 }
