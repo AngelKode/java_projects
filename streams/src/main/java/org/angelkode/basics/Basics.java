@@ -31,6 +31,5 @@ public class Basics {
         myList.stream().forEach(System.out::println);
 
 
-
     }
 }
