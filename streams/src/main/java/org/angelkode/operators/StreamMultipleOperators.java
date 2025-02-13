@@ -49,5 +49,14 @@ public class StreamMultipleOperators {
 
         System.out.println(summaryStatistics.getAverage());
         System.out.println(summaryStatistics.getMin());
+
+        //Map with int
+        IntStream charCount = Stream.of("Hola","Como","Estas   ")
+                .map(String::trim)
+                .mapToInt(String::length);
+
+        IntSummaryStatistics charCountStatistic = charCount.summaryStatistics();
+        System.out.println(charCountStatistic.getAverage());
+        System.out.println(charCountStatistic.getMin());
     }
 }
