@@ -1,5 +1,12 @@
 package org.angelkode.operators;
 
+import org.angelkode.models.User;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.IntSummaryStatistics;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -8,7 +15,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamMultipleOperators {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AWTException, IOException {
 
         //Filter
         long myUsers = Stream.of("PedrO","Lucia","","")
@@ -58,5 +65,16 @@ public class StreamMultipleOperators {
         IntSummaryStatistics charCountStatistic = charCount.summaryStatistics();
         System.out.println(charCountStatistic.getAverage());
         System.out.println(charCountStatistic.getMin());
+
+        //Flatmap
+        Stream<User> names = Stream.of("Juan","Pedro")
+                .map(User::new)
+                .flatMap(user -> {
+                    if(user.getName().equals("Juan")){
+                        return Stream.of(user);
+                    }
+                    return Stream.empty();
+                });
+        names.forEach(user -> System.out.println(user.getName()));
     }
 }
