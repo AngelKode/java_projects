@@ -2,10 +2,7 @@ package org.angelkode.operators;
 
 import org.angelkode.models.User;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.IntSummaryStatistics;
 import java.util.Optional;
