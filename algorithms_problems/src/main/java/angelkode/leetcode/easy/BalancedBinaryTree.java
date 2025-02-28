@@ -4,6 +4,7 @@ import angelkode.leetcode.easy.extraClasses.TreeNode;
 
 public class BalancedBinaryTree {
     public boolean isBalanced(TreeNode root) {
+        //Base cases to terminate recursion
         if (root == null) return true;
         if(root.left == null && root.right == null) return true;
 
@@ -11,21 +12,28 @@ public class BalancedBinaryTree {
         int leftHeight = calculateHeight(root.left);
         int rightHeight = calculateHeight(root.right);
 
-        //If the right height is higher than the left for 1 or more
-        return rightHeight == leftHeight || Math.abs(rightHeight) - 1 == leftHeight || Math.abs(leftHeight) - 1 == rightHeight ;
+        //Validate the height difference between each subtree, if higher than 1 the tree is not balanced
+        boolean isCurrentNodeBalanced = rightHeight == leftHeight || Math.abs(rightHeight) - 1 == leftHeight || Math.abs(leftHeight) - 1 == rightHeight ;
+
+        //If not balanced, terminate
+        if(!isCurrentNodeBalanced) {return false;}
+
+        //Otherwise, continue validating both subtrees of the current root
+        return isBalanced(root.left) && isBalanced(root.right);
     }
 
     private int calculateHeight(TreeNode node) {
         //Base case
         if (node == null) return 0;
 
+        //If the current node is not null, at least has height of 1
+        int baseHeight = 1;
+
         //Calculate both sizes
         int leftHeight = calculateHeight(node.left);
         int rightHeight = calculateHeight(node.right);
 
-        //TODO
-
         //Return the height of both subtrees and the actual root
-        return leftHeight + rightHeight + 1;
+        return Math.max(leftHeight, rightHeight) + baseHeight;
     }
 }
