@@ -1,13 +1,18 @@
 package angelkode.leetcode.easy;
 
+import angelkode.leetcode.easy.extraClasses.TreeNode;
+
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
 
-        PlusOne plusOne = new PlusOne();
+        BalancedBinaryTree bt = new BalancedBinaryTree();
 
-        Arrays.stream(plusOne.solve(new int[]{8,9,9,9})).forEach(System.out::println);
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+
+        System.out.println(bt.isBalanced(root));
 
     }
 }
