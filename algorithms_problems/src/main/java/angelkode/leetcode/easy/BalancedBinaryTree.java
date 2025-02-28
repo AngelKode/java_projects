@@ -33,7 +33,7 @@ public class BalancedBinaryTree {
         int leftHeight = calculateHeight(node.left);
         int rightHeight = calculateHeight(node.right);
 
-        //Return the height of both subtrees and the actual root
+        //Return the max height of both subtrees and the actual root
         return Math.max(leftHeight, rightHeight) + baseHeight;
     }
 }
