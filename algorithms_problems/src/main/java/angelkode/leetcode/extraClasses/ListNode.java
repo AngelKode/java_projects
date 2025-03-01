@@ -1,4 +1,4 @@
-package angelkode.leetcode.easy.extraClasses;
+package angelkode.leetcode.extraClasses;
 
 public class ListNode {
       public int val;

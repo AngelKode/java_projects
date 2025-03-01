@@ -1,6 +1,6 @@
 package angelkode.leetcode.easy;
 
-import angelkode.leetcode.easy.extraClasses.TreeNode;
+import angelkode.leetcode.extraClasses.TreeNode;
 
 public class MinimumDepthBinaryTree {
     public int minDepth(TreeNode root) {

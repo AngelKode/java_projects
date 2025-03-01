@@ -1,9 +1,6 @@
 package angelkode.leetcode.easy;
 
-import angelkode.leetcode.easy.extraClasses.ListNode;
-import angelkode.leetcode.easy.extraClasses.TreeNode;
-
-import java.util.Arrays;
+import angelkode.leetcode.extraClasses.ListNode;
 
 public class Main {
     public static void main(String[] args) {

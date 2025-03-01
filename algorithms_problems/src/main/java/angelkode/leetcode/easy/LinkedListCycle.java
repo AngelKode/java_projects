@@ -1,6 +1,6 @@
 package angelkode.leetcode.easy;
 
-import angelkode.leetcode.easy.extraClasses.ListNode;
+import angelkode.leetcode.extraClasses.ListNode;
 
 import java.util.HashMap;
 import java.util.Map;
