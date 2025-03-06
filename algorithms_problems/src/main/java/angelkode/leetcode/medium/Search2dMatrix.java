@@ -12,8 +12,13 @@ public class Search2dMatrix {
             return true;
         }
 
+        //If we only have one element, return false due to we already validate it
         int rows = matrix.length;
         int cols = matrix[0].length;
+
+        if (rows == 1 && cols == 1) {
+            return false;
+        }
 
         //Get the last value
         if (matrix[rows - 1][cols - 1] == target) {
@@ -21,37 +26,46 @@ public class Search2dMatrix {
         }
 
         //Using binary search if not founded
-        int middleRow = (rows / 2) - 1;
+        int middleRow = rows / 2;
         int middleCol = cols / 2;
         int middleValue = matrix[middleRow][middleCol];
-        int minIndexRow = 0, maxIndexRow = matrix.length,minIndexCol = 0, maxIndexCol = matrix[0].length;
+        int minIndexRow = 0, maxIndexRow = matrix.length - 1,minIndexCol, maxIndexCol;
 
-        //If target not at the middle, evaluate if the value founded is greater that the target
-        //If so, the value is on the left side, otherwise, on the right side
-
+        //While min index isnt grater than max index
+        //if that happens, we already check the last item
         while(minIndexRow <= maxIndexRow) {
 
+            //Before validate left or right side, validate if the current item is the target
             if (middleValue == target) {
                 return true;
             }
 
             if(middleValue < target){
                 //Target at right side
-                //TODO
-                //UPDATE INDEXES TO GET SUBARRAY
+                minIndexCol = ((middleCol + 1) == matrix[middleRow].length) ? matrix[middleRow].length : middleCol + 1;
+                maxIndexCol = matrix[middleRow].length - 1;
                 if(simpleLinearBinarySearch(minIndexCol,maxIndexCol,matrix[minIndexRow],target)){
                     return true;
                 }
+                //If nothing founded at the sub_array at the right of the current element of the array
+                //add min index + 1
                 minIndexRow++;
             }else{
-                //TODO
-                //UPDATE INDEXES TO GET SUBARRAY
+                //Target at left side
+                minIndexCol = 0;
+                maxIndexCol = ((middleCol - 1) < 0 ? middleCol : middleCol - 1);
                 if(simpleLinearBinarySearch(minIndexCol,maxIndexCol,matrix[minIndexRow],target)){
                     return true;
                 }
+                //If nothing founded at the sub_array at the left of the current element of the array
+                //subtract max index - 1
                 maxIndexRow--;
             }
-            middleValue = (maxIndexRow + minIndexRow) / 2;
+
+            //If nothing founded, calculate the new middle value indexes
+            middleRow = (maxIndexRow + minIndexRow) / 2;
+            //And get the item
+            middleValue =  matrix[middleRow][middleCol];
         }
 
         //False if nothing founded, worst case
