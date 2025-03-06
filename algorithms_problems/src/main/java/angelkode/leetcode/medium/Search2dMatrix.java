@@ -1,5 +1,7 @@
 package angelkode.leetcode.medium;
 
+import java.util.Arrays;
+
 public class Search2dMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0) {
@@ -19,48 +21,70 @@ public class Search2dMatrix {
         }
 
         //Using binary search if not founded
-        int middleRow = rows / 2;
+        int middleRow = (rows / 2) - 1;
         int middleCol = cols / 2;
         int middleValue = matrix[middleRow][middleCol];
-
-        if (middleValue == target) {
-            return true;
-        }
+        int minIndexRow = 0, maxIndexRow = matrix.length,minIndexCol = 0, maxIndexCol = matrix[0].length;
 
         //If target not at the middle, evaluate if the value founded is greater that the target
         //If so, the value is on the left side, otherwise, on the right side
-        boolean isFounded = false;
 
-        while(!isFounded || middleRow >= 0){
-            if(target < matrix[middleRow][middleCol]){
-                //If it's smaller, check if we have any items left at the left of the current array
-                if(middleCol == 0){
-                    //If no items left at the current array, get the mid value of the left size of the current matrix
-                    //For example, if we have a matrix 6x6, the middle array is at the index 3, if nothing found
-                    //The new mid value will only be between index 0 and 2
-                    middleRow = (rows - middleRow - 1) / 2;
-                    middleCol = cols / 2;
-                    continue;
-                }
-                //If not 0, then we have at least 1 item left at the current array
-                middleCol = cols / 2;
+        while(minIndexRow <= maxIndexRow) {
+
+            if (middleValue == target) {
+                return true;
             }
 
-            if(target > matrix[middleRow][middleCol]){
-                //If it's bigger, check if we have any items left at the right of the current array
-                if(middleCol == cols){
-                    //If no items left at the current array, get the mid value of the right size of the current matrix
-                    //For example, if we have a matrix 6x6, the middle array is at the index 3, if nothing found
-                    //The new mid value will only be between index 4 and 5
-                    middleRow = ((rows - middleRow) / 2 ) + middleRow;
-                    middleCol = cols / 2;
-                    continue;
+            if(middleValue < target){
+                //Target at right side
+                //TODO
+                //UPDATE INDEXES TO GET SUBARRAY
+                if(simpleLinearBinarySearch(minIndexCol,maxIndexCol,matrix[minIndexRow],target)){
+                    return true;
                 }
-                //If not 0, then we have at least 1 item left at the current array
-                middleCol = (cols / 2) + middleCol;
+                minIndexRow++;
+            }else{
+                //TODO
+                //UPDATE INDEXES TO GET SUBARRAY
+                if(simpleLinearBinarySearch(minIndexCol,maxIndexCol,matrix[minIndexRow],target)){
+                    return true;
+                }
+                maxIndexRow--;
             }
+            middleValue = (maxIndexRow + minIndexRow) / 2;
         }
+
         //False if nothing founded, worst case
+        return false;
+    }
+
+    private boolean simpleLinearBinarySearch(int minIndex,int maxIndex, int[] subArray, int target) {
+        if (subArray.length == 1) {
+            return target == subArray[0];
+        }
+
+        if(subArray[0] == target || subArray[subArray.length - 1] == target){
+            return true;
+        }
+
+        int min = 0, max = subArray.length - 1;
+        int midValue = max / 2;
+
+        while (min <= max) {
+            if(subArray[midValue] == target){
+                return true;
+            }
+
+            if(subArray[midValue] < target){
+                //Target at right side
+                min = midValue + 1;//Update min index
+            }else{
+                //Target at left side
+                max = midValue - 1;
+            }
+            midValue = (max + min) / 2;
+        }
+
         return false;
     }
 }
