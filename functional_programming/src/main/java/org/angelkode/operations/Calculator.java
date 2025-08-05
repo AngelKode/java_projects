@@ -1,7 +1,6 @@
 package org.angelkode.operations;
 
 import java.util.function.BiFunction;
-import java.util.function.Predicate;
 
 public class Calculator {
 

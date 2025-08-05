@@ -1,10 +1,12 @@
 package classes_inheritance;
 
-public class main {
+import java.util.ArrayList;
+
+public class MainRun {
     public static void main(String[] args) {
-        Cars myCar = new Cars(198);
-        myCar.increaseSpeed();
-        myCar.increaseSpeed();
-        myCar.increaseSpeed();
+        Toyota toy1 = new Toyota(120, false);
+        toy1.turnOnAndroidAuto();
+        ArrayList<String> myArrayList = new ArrayList<>();
+        myArrayList.add("");
     }
 }
