@@ -32,7 +32,7 @@ public class Cars {
     }
 
     public String getName(){
-        if(this.name.isBlank()){
+        if(this.name.isEmpty()){
             return "IM AN UNNAMED CAR :(";
         }
         return "IM THE CAR NAMED: " + this.name;
