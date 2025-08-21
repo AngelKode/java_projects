@@ -1,11 +1,9 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,7 +16,14 @@ public class SeleniumBasicsTest {
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
+        //Set page load strategy
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+
+        //Bypass CORS error
+        chromeOptions.addArguments("--disable-web-security");
+
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @AfterSuite
@@ -56,7 +61,7 @@ public class SeleniumBasicsTest {
         signUpLink.click();
 
         //Find signup button
-        String signUpButtonXPath = "//li/a[@href='/login']";
+        String signUpButtonXPath = "//button[@data-qa='signup-button']";
         WebElement signupButton = waitElement.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(signUpButtonXPath))));
 
         //Type data in the sign-up form
@@ -69,26 +74,23 @@ public class SeleniumBasicsTest {
         //Register User
         signupButton.click();
 
-        //TODO: Add CORS configuration
-
         //Wait until Enter Account Information page displays
         String enterAccInfoTitleXPath = "//div[@class='login-form']/h2/b[text()='Enter Account Information']";
 
         try {
-            WebElement enterAccInfoTitle = waitElement.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(enterAccInfoTitleXPath))));
+            //Validate if we get to the enter account information page
+            WebElement enterAccInfoTitle = waitElement.until(
+                    driver -> {
+                        return driver.findElement(By.xpath(enterAccInfoTitleXPath));
+                    }
+            );
             Assert.assertEquals(enterAccInfoTitle.getText(),"ENTER ACCOUNT INFORMATION");
-        }catch (Exception e){
-            System.out.println("Cant find ENTER ACCOUNT INFORMATION label");
-        }
-
-        try {
-            //Validate if the error message is being displayed
-            WebElement errorMessageSignUp = driver.findElement(By.xpath("//form/p[text()='Email Address already exist!']"));
-            if(errorMessageSignUp.isDisplayed()){
-                Assert.fail("Data duplicated");
-            }
-        }catch (Exception e){
+        }catch (NoSuchElementException e){
+            //If not, that means we cant get to the page
             Assert.fail("Error while creating account information");
+        }catch (TimeoutException timeoutException){
+            //When title of the page is not being displayed
+            Assert.fail("Enter Account label is not being displayed");
         }
     }
 
