@@ -2,8 +2,6 @@ package com.learning.bankSimulator.models;
 
 import com.learning.bankSimulator.interfaces.AccountOperation;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 @lombok.Data
 public class BankAccount implements AccountOperation {
 
