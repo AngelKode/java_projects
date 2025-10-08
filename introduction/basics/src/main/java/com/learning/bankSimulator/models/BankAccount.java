@@ -5,12 +5,13 @@ import com.learning.bankSimulator.interfaces.AccountOperation;
 @lombok.Data
 public class BankAccount implements AccountOperation {
 
+    private static long ACCOUNT_COUNTER_ID = 1;
     private double balance;
     private long accountNumber;
 
     public BankAccount(double initialBalance) {
         this.balance = initialBalance;
-        this.accountNumber = 0;
+        this.accountNumber = ACCOUNT_COUNTER_ID++;
     }
 
     @Override
