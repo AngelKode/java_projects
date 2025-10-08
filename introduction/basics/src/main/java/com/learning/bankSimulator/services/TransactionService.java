@@ -1,10 +1,9 @@
 package com.learning.bankSimulator.services;
 
-import com.learning.bankSimulator.interfaces.AccountOperation;
 import com.learning.bankSimulator.interfaces.TransactionOperation;
 import com.learning.bankSimulator.models.BankAccount;
 
-public class TransactionService implements TransactionOperation {
+public class TransactionService implements TransactionOperation, Runnable{
 
 
     @Override
@@ -20,5 +19,10 @@ public class TransactionService implements TransactionOperation {
     @Override
     public void deposit(BankAccount originAccount, double amount) {
         //TODO
+    }
+
+    @Override
+    public void run() {
+
     }
 }
