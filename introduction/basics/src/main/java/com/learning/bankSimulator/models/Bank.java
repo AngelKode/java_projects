@@ -22,7 +22,6 @@ public class Bank implements BankOperation {
         if(TransactionType.TRANSFER.equals(transactionType)) {
             throw new InvalidParameterException("You cant TRANSFER with only one account");
         }
-
     }
 
     @Override
