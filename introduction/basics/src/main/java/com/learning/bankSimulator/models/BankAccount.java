@@ -35,4 +35,10 @@ public class BankAccount implements AccountOperation {
         this.balance += amount;
         System.out.println(". New balance: " + this.balance);
     }
+
+    @Override
+    public String toString() {
+        return "Bank Account [accountNumber=" + accountNumber + ", balance=" + balance + "]\n";
+    }
 }
+
