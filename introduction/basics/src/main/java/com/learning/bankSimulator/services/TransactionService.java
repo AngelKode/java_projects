@@ -9,7 +9,7 @@ public class TransactionService{
         //TODO
     }
 
-    public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) {
+    public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) throws InterruptedException {
 
         if(originAccount == null) {
             System.out.println("Account not found. Deposit transaction aborted");

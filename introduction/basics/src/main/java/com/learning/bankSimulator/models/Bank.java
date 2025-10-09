@@ -18,7 +18,7 @@ public class Bank implements BankOperation {
     }
 
     @Override
-    public void startSimpleTransaction(TransactionType transactionType, double amount, String accountID) {
+    public void startSimpleTransaction(TransactionType transactionType, double amount, String accountID) throws InterruptedException {
         if(TransactionType.TRANSFER.equals(transactionType)) {
             throw new InvalidParameterException("You cant TRANSFER with only one account");
         }

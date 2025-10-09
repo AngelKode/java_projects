@@ -27,7 +27,7 @@ public class BankAccount implements AccountOperation {
     }
 
     @Override
-    public synchronized void deposit(double amount) {
+    public synchronized void deposit(double amount) throws InterruptedException {
         if(amount < BankAccount.ACCOUNT_MIN_FUNDS){
             System.out.println("Unable to deposit negative values. Operation rejected :(");
             return;
@@ -35,6 +35,7 @@ public class BankAccount implements AccountOperation {
         System.out.println("Depositing " + amount + " to bank account " + accountNumber);
         this.balance += amount;
         System.out.println(". New balance: " + this.balance);
+        Thread.sleep(300);
     }
 
     @Override
