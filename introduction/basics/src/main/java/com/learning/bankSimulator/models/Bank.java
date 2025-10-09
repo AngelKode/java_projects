@@ -2,6 +2,7 @@ package com.learning.bankSimulator.models;
 
 import com.learning.bankSimulator.enums.TransactionType;
 import com.learning.bankSimulator.interfaces.BankOperation;
+import com.learning.bankSimulator.services.TransactionService;
 
 import java.security.InvalidParameterException;
 import java.util.Map;
@@ -18,10 +19,11 @@ public class Bank implements BankOperation {
 
     @Override
     public void startSimpleTransaction(TransactionType transactionType, double amount, String accountID) {
-        //TODO
         if(TransactionType.TRANSFER.equals(transactionType)) {
             throw new InvalidParameterException("You cant TRANSFER with only one account");
         }
+        BankAccount accountToOperate = this.bankAccounts.getOrDefault(accountID, null);
+        TransactionService.accountOperation(accountToOperate, amount, transactionType);
     }
 
     @Override
