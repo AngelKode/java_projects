@@ -6,6 +6,7 @@ import com.learning.bankSimulator.interfaces.AccountOperation;
 public class BankAccount implements AccountOperation {
 
     private static long ACCOUNT_COUNTER_ID = 1;
+    private static final double ACCOUNT_MIN_FUNDS = 0.0D;
     private double balance;
     private long accountNumber;
 
@@ -27,7 +28,7 @@ public class BankAccount implements AccountOperation {
 
     @Override
     public synchronized void deposit(double amount) {
-        if(amount < 0.0D){
+        if(amount < BankAccount.ACCOUNT_MIN_FUNDS){
             System.out.println("Unable to deposit negative values. Operation rejected :(");
             return;
         }
