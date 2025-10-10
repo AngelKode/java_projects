@@ -12,9 +12,9 @@ public class TransactionGenerator {
     private Bank bank;
     ExecutorService executor;
 
-    public TransactionGenerator(Bank bank) {
+    public TransactionGenerator(Bank bank, int numberOfThreads) {
         this.bank = bank;
-        this.executor = Executors.newFixedThreadPool(10);
+        this.executor = Executors.newFixedThreadPool(numberOfThreads);
     }
 
     public void generateTransactions(int numberOfTransactions) {
