@@ -16,7 +16,7 @@ public class BankAccount implements AccountOperation {
     }
 
     @Override
-    public synchronized void withdraw(double amount) {
+    public synchronized void withdraw(double amount) throws InterruptedException {
         if(this.balance < amount) {
             System.out.println("Insufficient funds. Operation rejected :(");
             return;
@@ -24,6 +24,7 @@ public class BankAccount implements AccountOperation {
         System.out.print("Withdrawing " + amount + " from bank account " + accountNumber);
         this.balance -= amount;
         System.out.println(". New balance: " + this.balance);
+        Thread.sleep(300);
     }
 
     @Override
