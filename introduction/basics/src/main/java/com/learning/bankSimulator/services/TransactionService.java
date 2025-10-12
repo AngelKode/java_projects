@@ -43,9 +43,10 @@ public class TransactionService{
     }
 
     public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) throws InterruptedException {
-
+        System.out.println("---------------------------------------------------------------------------------------");
         if(originAccount == null) {
             System.out.println("Account not found. Deposit transaction aborted");
+            System.out.println("---------------------------------------------------------------------------------------");
             return;
         }
 
@@ -57,6 +58,7 @@ public class TransactionService{
         }
 
         System.out.print("Transaction completed\nNew Balance: " + originAccount);
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
 }
