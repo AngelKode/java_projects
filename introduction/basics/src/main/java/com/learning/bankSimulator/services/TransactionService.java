@@ -6,7 +6,7 @@ import com.learning.bankSimulator.models.BankAccount;
 public class TransactionService{
 
     public static void transferMoney(BankAccount originAccount, BankAccount destAccount, double amount) {
-
+        //TODO: Move the details printed to BankAccount class method
         System.out.println("---------------------------------------------------------------------------------------");
         if(originAccount == null || destAccount == null){
             System.out.println("Unable to transfer money because the bank account doesnt exist.");
@@ -42,7 +42,7 @@ public class TransactionService{
         System.out.println("---------------------------------------------------------------------------------------");
     }
 
-    public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) throws InterruptedException {
+    public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) {
         System.out.println("---------------------------------------------------------------------------------------");
         if(originAccount == null) {
             System.out.println("Account not found. Deposit transaction aborted");
@@ -51,13 +51,20 @@ public class TransactionService{
         }
 
         System.out.print("Starting transaction to " + originAccount);
-        if(type == TransactionType.DEPOSIT) {
-            originAccount.deposit(amount);
-        }else{
-            originAccount.withdraw(amount);
+
+        try{
+            if(type == TransactionType.DEPOSIT) {
+                originAccount.deposit(amount);
+            }else{
+                originAccount.withdraw(amount);
+            }
+        }catch (InterruptedException ex){
+            System.out.println("Error while executing operation to the account. " + ex.getMessage());
+            System.out.println("---------------------------------------------------------------------------------------");
+            return;
         }
 
-        System.out.print("Transaction completed\nNew Balance: " + originAccount);
+        System.out.println("Transaction completed");
         System.out.println("---------------------------------------------------------------------------------------");
     }
 
