@@ -2,6 +2,10 @@ package com.learning.bankSimulator.models;
 
 import com.learning.bankSimulator.interfaces.AccountOperation;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 @lombok.Data
 public class BankAccount implements AccountOperation {
 
@@ -9,39 +13,66 @@ public class BankAccount implements AccountOperation {
     private static final double ACCOUNT_MIN_FUNDS = 0.0D;
     private double balance;
     private long accountNumber;
+    private ReadWriteLock accountLock;
 
     public BankAccount(double initialBalance) {
         this.balance = initialBalance;
         this.accountNumber = ACCOUNT_COUNTER_ID++;
+        this.accountLock = new ReentrantReadWriteLock();
     }
 
     @Override
-    public synchronized void withdraw(double amount) throws InterruptedException {
+    public void withdraw(double amount) {
         if(this.balance < amount) {
-            System.out.println("Insufficient funds. Operation rejected :(");
+            System.out.println("Insufficient funds to withdraw " + amount + ". Operation rejected :(");
             return;
         }
-        System.out.print("Withdrawing " + amount + " from bank account " + accountNumber);
-        this.balance -= amount;
-        System.out.println(". New balance: " + this.balance);
-        Thread.sleep(300);
+
+        //Lock the thread to operate the balance
+        try {
+            this.accountLock.writeLock().lock();
+            System.out.println("Withdrawing " + amount + " from bank account " + accountNumber);
+            Thread.sleep(3000);
+            this.balance -= amount;
+            System.out.println("New balance: " + this.balance);
+        }catch(InterruptedException ex){
+            System.out.println("Withdrawing went wrong." + ex.getMessage());
+        }finally {
+            //Unlock the thread
+            this.accountLock.writeLock().unlock();
+        }
     }
 
     @Override
-    public synchronized void deposit(double amount) throws InterruptedException {
+    public void deposit(double amount){
         if(amount < BankAccount.ACCOUNT_MIN_FUNDS){
             System.out.println("Unable to deposit negative values. Operation rejected :(");
             return;
         }
-        System.out.println("Depositing " + amount + " to bank account " + accountNumber);
-        this.balance += amount;
-        System.out.println(". New balance: " + this.balance);
-        Thread.sleep(300);
+
+        //Lock the thread to operate the account
+        try{
+            this.accountLock.writeLock().lock();
+            System.out.println("Depositing " + amount + " to bank account " + accountNumber);
+            Thread.sleep(3000);
+            this.balance += amount;
+            System.out.println("New balance: " + this.balance);
+        }catch (InterruptedException ex){
+            System.out.println("Depositing went wrong." + ex.getMessage());
+        }finally {
+            this.accountLock.writeLock().unlock();
+        }
     }
 
     @Override
     public String toString() {
-        return "Bank Account [accountNumber=" + accountNumber + ", balance=" + balance + "]\n";
+        //Lock read-lock when only reading data
+        try{
+            this.accountLock.readLock().lock();
+            return "Bank Account [accountNumber=" + accountNumber + ", balance=" + balance + "]";
+        }finally {
+            this.accountLock.readLock().unlock();
+        }
     }
 }
 
