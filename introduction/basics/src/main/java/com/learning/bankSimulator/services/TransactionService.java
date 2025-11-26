@@ -6,7 +6,7 @@ import com.learning.bankSimulator.models.BankAccount;
 public class TransactionService{
 
     public static void transferMoney(BankAccount originAccount, BankAccount destAccount, double amount) {
-        //TODO: Move the details printed to BankAccount class method
+        //TODO: refactor function name to be more clear
         System.out.println("---------------------------------------------------------------------------------------");
         if(originAccount == null || destAccount == null){
             System.out.println("Unable to transfer money because the bank account doesnt exist.");
@@ -37,6 +37,7 @@ public class TransactionService{
     }
 
     public static void accountOperation(BankAccount originAccount, double amount, TransactionType type) {
+        //TODO: refactor function name to be more clear
         System.out.println("---------------------------------------------------------------------------------------");
         if(originAccount == null) {
             System.out.println("Account not found. Deposit transaction aborted");

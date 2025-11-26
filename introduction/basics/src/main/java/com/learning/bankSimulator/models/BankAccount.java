@@ -13,7 +13,7 @@ public class BankAccount implements AccountOperation {
     private static final double ACCOUNT_MIN_FUNDS = 0.0D;
     private double balance;
     private long accountNumber;
-    private ReadWriteLock accountLock;
+    private ReentrantReadWriteLock accountLock;
 
     public BankAccount(double initialBalance) {
         this.balance = initialBalance;
@@ -49,7 +49,6 @@ public class BankAccount implements AccountOperation {
             System.out.println("Unable to deposit negative values. Operation rejected :(");
             return;
         }
-
         //Lock the thread to operate the account
         try{
             this.accountLock.writeLock().lock();

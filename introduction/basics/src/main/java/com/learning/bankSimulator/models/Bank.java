@@ -28,6 +28,18 @@ public class Bank implements BankOperation {
 
     @Override
     public void startSharedTransaction(TransactionType transactionType, double amount, String originAccountID, String destAccountID) {
-        //TODO
+        if(!TransactionType.TRANSFER.equals(transactionType)) {
+            throw new InvalidParameterException("You can only TRANSFER when trying to operate a SHARED transaction");
+        }
+
+        BankAccount originBankAccount = this.bankAccounts.getOrDefault(originAccountID, null);
+        BankAccount destBankAccount = this.bankAccounts.getOrDefault(destAccountID, null);
+
+        //Validate if both accounts are not null
+        if(originBankAccount == null && destBankAccount == null) {
+            throw new Error("Unable to look up one or both accounts.");
+        }
+
+        TransactionService.transferMoney(originBankAccount, destBankAccount, amount);
     }
 }

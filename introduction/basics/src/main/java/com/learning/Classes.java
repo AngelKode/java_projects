@@ -1,6 +1,6 @@
 package com.learning;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Classes {
     public static void main(String[] args) {
@@ -10,7 +10,6 @@ public class Classes {
         myCar2.setYearModel(2021);
         Car myCar3 = new Car();
         myCar3.setYearModel(1992);
-        
         Car[] myCars = new Car[3];
         myCars[2] = myCar;
         myCars[0] = myCar2;
