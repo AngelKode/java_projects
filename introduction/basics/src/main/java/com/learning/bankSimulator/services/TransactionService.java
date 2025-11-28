@@ -19,7 +19,7 @@ public class TransactionService{
 
         if(originAccount.getBalance() <= 0 || originAccount.getBalance() < amount){
             System.out.print("Unable to transfer money due to insufficient balance.");
-            System.out.print("Reason: Amount to transfer: " + amount + " | Money available:" + originAccount);
+            System.out.print("Reason: Amount to transfer: " + amount + " | Money available:" + originAccount + "\n");
             System.out.println("---------------------------------------------------------------------------------------");
             return;
         }
@@ -32,7 +32,7 @@ public class TransactionService{
         //Deposit the amount to the destination account
         destAccount.deposit(amount);
 
-        System.out.print("Successfully operation.\nNew Balance: Origin-" + originAccount + "New Balance: Dest-" + destAccount);
+        System.out.print("Successfully operation.\nNew Balance: Origin-" + originAccount + "New Balance: Dest-" + destAccount + "\n");
         System.out.println("---------------------------------------------------------------------------------------");
     }
 
