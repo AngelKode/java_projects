@@ -17,4 +17,10 @@ public class RandomOperationGenerator implements RandomOperation {
     public TransactionType getNewRandomTransactionType() {
         return TransactionType.values()[rand.nextInt(TransactionType.values().length)];
     }
+
+    @Override
+    public double getNewRandomAmount(double minRange, double maxRange) {
+        //Return a number between min range and max range
+        return minRange + rand.nextDouble() * (maxRange - minRange);
+    }
 }
