@@ -1,14 +1,11 @@
 package com.learning.bankSimulator;
 
 import com.learning.bankSimulator.enums.TransactionType;
-import com.learning.bankSimulator.models.Bank;
 import com.learning.bankSimulator.models.BankAccount;
 import com.learning.bankSimulator.services.TransactionService;
 
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class mainBankInit {
     public static void main(String[] args) {
