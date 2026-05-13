@@ -1,9 +1,8 @@
 package com.learning.lambdasAndStreams;
 
-public class Calculator implements AddOperation{
-
-    @Override
-    public int addTwoNumbers(int a, int b) {
-        return a + b;
+public class Calculator{
+    public static void main(String[] args) {
+        AddOperation addTwoStringsLength = Integer::sum;
+        int s = addTwoStringsLength.getResult(2,3);
     }
 }
